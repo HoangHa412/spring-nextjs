@@ -81,12 +81,12 @@ const FormLogin =() =>{
                 </div>
                 {/*button*/}
                 <div className='flex justify-center items-center '>
-                    <Link href='/welcome'>
+                    {/*<Link href='/welcome'>*/}
                         <button
-                            className='h-[40px] w-full  font-semibold  flex px-10 rounded-8 items-center justify-center bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white'>
-                            Sign in to your account
+                            className='h-[40px] w-full  font-semibold  flex  rounded-8 items-center justify-center bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white'>
+                            <Link href='/welcome'>Sign in to your account</Link>
                         </button>
-                    </Link>
+                    {/*</Link>*/}
                 </div>
                 <h3 className='text-sm text-gray-500'>Don&#39;t have an account yet?
                     <Link href='#'>

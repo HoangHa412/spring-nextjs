@@ -1,3 +1,14 @@
+import {ReactNode} from "react";
+
+export interface MenuBase {
+    key: string
+    label: string
+    href?: string
+}
+
+export interface MenuItem extends MenuBase {
+    children?: ReactNode
+}
 
 export interface Users{
     id: number

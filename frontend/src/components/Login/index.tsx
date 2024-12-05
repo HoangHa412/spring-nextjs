@@ -11,7 +11,7 @@ const inforLists = [
 
 const Login = () => {
     return (
-        <div className=' mx-auto max-w-[1200px] flex flex-row gap-[165px] opacity-80'>
+        <div className='mx-auto max-w-[1200px] flex flex-row gap-[165px] opacity-80'>
             <div className='w-full max-w-[463px] flex flex-col gap-8 pt-4'>
                 <div className='w-full flex flex-col gap-2'>
                     <h1 className='text-4xl text-[#001230] font-bold'>Welcome to</h1>

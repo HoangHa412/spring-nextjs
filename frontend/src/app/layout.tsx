@@ -7,8 +7,8 @@ import {usePathname} from "next/navigation";
 import React from "react";
 
 const inter = Inter({
-    subsets: ["latin"],
-    display: "swap",
+    subsets: ['latin'],
+    display: 'swap'
 });
 
 
@@ -32,7 +32,7 @@ export default function RootLayout({
         {showHeader && <Header/>}
         <div className="flex">
             {showLeftSide && <LeftSide/>}
-            <div className={showLeftSide ? "ml-[250px] w-full" : "w-full"}>
+            <div className={showLeftSide ? "pl-[270px] p-3 w-full" : "w-full"}>
                 {children}
             </div>
         </div>

@@ -1,8 +1,9 @@
 import axios from "axios";
+import {API_BASE_URL} from "@/utils/constant";
 
 
 const axiosInstanceJwt = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: API_BASE_URL,
     headers: {
         'Accept': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
