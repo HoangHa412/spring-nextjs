@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  msg-broker:
+    container_name: "msg-broker"
+    image: redis:latest
+    env_file:
+      - .evn.dev.msg-broker.reddis
+    volumes:
+      - ./redis.conf:/etc/redis/redis.conf
+    ports:
+      - "6379:6379"

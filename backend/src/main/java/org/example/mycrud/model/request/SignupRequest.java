@@ -15,5 +15,7 @@ public class SignupRequest {
     private String password;
     @NonNull
     private String cfPassword;
+    private String email;
+    private String phone;
     private Set<String> roles;
 }

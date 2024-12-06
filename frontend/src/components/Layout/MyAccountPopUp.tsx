@@ -9,7 +9,7 @@ const MyAccountPopUp = () =>{
     ]
 
     return (
-        <div className='w-[185px] p-6 '>
+        <div className='w-[185px] p-6'>
             <div className='grid grid-cols-1 gap-6 rounded-md'>
                 {tabs.map((group, i) => (
                     <div key={i}>

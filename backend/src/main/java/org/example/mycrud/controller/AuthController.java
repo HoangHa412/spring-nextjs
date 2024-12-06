@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -93,7 +94,7 @@ public class AuthController {
         String accessToken = jwtUtils.generateToken(userDetails, permission);
 
         String refreshToken = jwtUtils.generateRefreshToken(userDetails);
-//        redisTemplate.opsForValue().set(refreshToken, true, jwtRefreshExprition, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(refreshToken, true, jwtRefreshExprition, TimeUnit.MINUTES);
         LoginResponse loginResponse = LoginResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();
         loginResponse.setCode(0);
         return ResponseEntity.ok().body(loginResponse);
@@ -117,9 +118,13 @@ public class AuthController {
         User user = new User();
         user.setUserName(signupRequest.getUsername());
         user.setPassword(signupRequest.getPassword());
+        user.setEmail(signupRequest.getEmail());
+        user.setPhone(signupRequest.getPhone());
+        user.setCreatedAt(LocalDateTime.now());
+
         Set<Role> roles = new HashSet<>();
         if(signupRequest.getRoles() == null || signupRequest.getRoles().isEmpty()){
-            Optional<Role> defaultRole = roleService.getRoleByName("ROLE_ADMIN");
+            Optional<Role> defaultRole = roleService.getRoleByName("ROLE_USER");
             defaultRole.ifPresent(roles::add);
         }
         user.setRoles(roles);

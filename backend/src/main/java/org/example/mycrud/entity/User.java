@@ -30,10 +30,10 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "fullname", length = 250, nullable = false)
+    @Column(name = "fullname", length = 250)
     private String fullName;
 
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone")
     private String phone;
 
     @Column(name = "password", nullable = false)
