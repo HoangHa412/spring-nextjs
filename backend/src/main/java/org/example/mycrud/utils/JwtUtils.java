@@ -34,7 +34,7 @@ public class JwtUtils {
                 .claim("userId", userDetailsImpl.getId())
                 .claim("Role", authorities)
                 .issuedAt(Date.from(Instant.now()))
-                .expiration(Date.from(Instant.now().plusSeconds(jwtExprition)))
+                .expiration(Date.from(Instant.now().plusMillis(jwtExprition)))
                 .signWith(generateKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -44,7 +44,7 @@ public class JwtUtils {
                 .subject(userDetailsImpl.getUsername())
                 .claim("userId", userDetailsImpl.getId())
                 .issuedAt(Date.from(Instant.now()))
-                .expiration(Date.from(Instant.now().plusSeconds(jwtRefrehExprition)))
+                .expiration(Date.from(Instant.now().plusMillis(jwtRefrehExprition)))
                 .signWith(generateKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

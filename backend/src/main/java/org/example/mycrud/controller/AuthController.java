@@ -15,7 +15,6 @@ import org.example.mycrud.service.UserService;
 import org.example.mycrud.utils.JwtUtils;
 import org.example.mycrud.utils.ServiceUtils;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
@@ -63,9 +62,9 @@ public class AuthController {
     private static final int PASSWORD_LENGTH = 30;
 
     final
-    RedisTemplate<String, Object> redisTemplate;
+    RedisTemplate<String, String> redisTemplate;
 
-    public AuthController(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userService, MailService mailService, RoleService roleService, RedisTemplate<String, Object> redisTemplate) {
+    public AuthController(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userService, MailService mailService, RoleService roleService, RedisTemplate<String, String> redisTemplate) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
@@ -94,7 +93,7 @@ public class AuthController {
         String accessToken = jwtUtils.generateToken(userDetails, permission);
 
         String refreshToken = jwtUtils.generateRefreshToken(userDetails);
-        redisTemplate.opsForValue().set(refreshToken, true, jwtRefreshExprition, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(refreshToken, "true", jwtRefreshExprition, TimeUnit.MILLISECONDS);
         LoginResponse loginResponse = LoginResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();
         loginResponse.setCode(0);
         return ResponseEntity.ok().body(loginResponse);
@@ -137,8 +136,9 @@ public class AuthController {
     @PostMapping("/refreshToken")
     public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
 
-        Boolean isValid = (Boolean) redisTemplate.opsForValue().get(refreshTokenRequest.getRefreshToken());
-        if(isValid == null || !isValid){
+        String isValid = redisTemplate.opsForValue().get(refreshTokenRequest.getRefreshToken());
+
+        if(isValid == null || !isValid.equals("true")){
             return ResponseEntity.status(HttpStatus.SC_UNAUTHORIZED)
                     .body(BaseResponse.builder().code(ErrorCode.UNAUTHORIZED.getCode()).message(ErrorCode.UNAUTHORIZED.getMessage()).build());
         }
@@ -163,7 +163,7 @@ public class AuthController {
 
         String accessToken = jwtUtils.generateToken(userDetails, perrmissions);
         String refreshToken = jwtUtils.generateRefreshToken(userDetails);
-        redisTemplate.opsForValue().set(refreshToken, true, jwtRefreshExprition, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(refreshToken, "true", jwtRefreshExprition, TimeUnit.MILLISECONDS);
 
         LoginResponse loginResponse = LoginResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();
         loginResponse.setCode(0);

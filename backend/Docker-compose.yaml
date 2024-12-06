@@ -1,11 +1,15 @@
 version: '3.9'
+
 services:
-  msg-broker:
-    container_name: "msg-broker"
+  redis:
+    container_name: redis-server
     image: redis:latest
-    env_file:
-      - .evn.dev.msg-broker.reddis
+    command: [ "redis-server", "/etc/redis/redis.conf" ]
     volumes:
       - ./redis.conf:/etc/redis/redis.conf
     ports:
       - "6379:6379"
+
+volumes:
+  redis_data:
+

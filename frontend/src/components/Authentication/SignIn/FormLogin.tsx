@@ -29,18 +29,24 @@ const FormLogin: React.FC<FormLoginProps> = ({onSignUpClick, onForgotPasswordCli
         const savedRefreshToken = localStorage.getItem('refreshToken');
         if (savedRefreshToken) {
             setForm((prev) => ({...prev, rememberMe: true}));
-            handleRefreshToken(savedRefreshToken);
+            handleRefreshToken(savedRefreshToken).then((r) => {
+                if (r === undefined) {
+                    router.push('/welcome')
+                }
+            });
         }
     }, []);
 
     const handleRefreshToken = async (savedRefreshToken: string) => {
         try {
             await AuthService.refreshToken(savedRefreshToken).then((response) => {
-                if (response.accessToken) {
-                    sessionStorage.setItem('token', response.accessToken); // Lưu vào sessionStorage
+                if (response.accessToken && response.refreshToken) {
+                    sessionStorage.setItem('token', response.accessToken);
+                    localStorage.setItem('refreshToken', response.refreshToken);
                 } else {
                     console.error('Failed to refresh token');
                 }
+                return response
             });
         } catch (error) {
             console.error("Failed to refresh token: ", error);
@@ -181,9 +187,9 @@ const FormLogin: React.FC<FormLoginProps> = ({onSignUpClick, onForgotPasswordCli
                                className='w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800'/>
                         <span className='text-gray-500 ml-1 text-sm'>Remember me</span>
                     </label>
-                        <span
-                            className='text-sky-600 text-sm font-medium hover:underline text-right cursor-pointer'
-                            onClick={onForgotPasswordClick}>Forget password?</span>
+                    <span
+                        className='text-sky-600 text-sm font-medium hover:underline text-right cursor-pointer'
+                        onClick={onForgotPasswordClick}>Forget password?</span>
                 </div>
 
                 {/*button*/}
@@ -195,8 +201,8 @@ const FormLogin: React.FC<FormLoginProps> = ({onSignUpClick, onForgotPasswordCli
                     </button>
                 </div>
                 <h3 className='text-sm text-gray-500'>Don&#39;t have an account yet?
-                        <span className='text-sky-800 font-bold hover:underline cursor-pointer'
-                              onClick={onSignUpClick}>Sign up here</span>
+                    <span className='text-sky-800 font-bold hover:underline cursor-pointer'
+                          onClick={onSignUpClick}>Sign up here</span>
                 </h3>
             </form>
         </div>
