@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FormLogin from "@/components/Authentication/SignIn/FormLogin";
 import Image from "next/image";
 import '@/components/Authentication/index.css';
@@ -8,6 +8,9 @@ import { Swiper as SwiperInstance } from 'swiper/types';
 import FormSignUp from "@/components/Authentication/SignUp/FormSignUp";
 import 'swiper/css'
 import FormForgot from "@/components/Authentication/ForgorPassword/FormForgot";
+import {useParams} from "next/navigation";
+import SendSuccess from "@/components/Authentication/ForgorPassword/SendSuccess";
+
 
 interface InforList {
     title: string;
@@ -21,15 +24,17 @@ const inforLists: InforList[] = [
 ];
 
 const Login: React.FC = () => {
+    const  path  = useParams()
+    console.log(path)
     const [swiperInstance, setSwiperInstance] = useState<SwiperInstance | null>(null);
 
     const handleSignUpClick = () => swiperInstance?.slideTo(0);
     const handleSignInClick = () => swiperInstance?.slideTo(1);
     const handleForgotClick = () => swiperInstance?.slideTo(2);
-
+    const handleSuccessSendMailClick = () => swiperInstance?.slideTo(3);
 
     return (
-        <div className="mx-auto w-full max-w-[1200px] flex flex-row gap-[165px] justify-center opacity-80">
+        <div className="mx-auto w-full max-w-[1200px] flex flex-row gap-[165px]   opacity-80">
             <div className="w-full max-w-[463px] flex flex-col gap-8 pt-4">
                 <div className="w-full flex flex-col gap-2">
                     <h1 className="text-4xl text-[#001230] font-bold">Welcome to</h1>
@@ -62,7 +67,7 @@ const Login: React.FC = () => {
                     slidesPerView={1}
                     pagination={{ clickable: true }}
                     onSwiper={setSwiperInstance}
-                    className='w-full max-w-[500px] '
+                    className='w-full max-w-[500px] justify-center items-center flex'
                     initialSlide={1}
                 >
                     <SwiperSlide>
@@ -75,7 +80,10 @@ const Login: React.FC = () => {
                     </SwiperSlide>
                     <SwiperSlide>
                         {/* Form Sign Up */}
-                        <FormForgot onSignInClick={handleSignInClick}/>
+                        <FormForgot onSignInClick={handleSignInClick} onSuccessClick={handleSuccessSendMailClick}/>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <SendSuccess />
                     </SwiperSlide>
                 </Swiper>
         </div>

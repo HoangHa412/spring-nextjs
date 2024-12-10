@@ -1,5 +1,5 @@
-import Login from "../components/Authentication";
-import '../app/globals.css'
+import Login from "../../components/Authentication";
+import '../globals.css'
 
 export default function Home() {
     return (

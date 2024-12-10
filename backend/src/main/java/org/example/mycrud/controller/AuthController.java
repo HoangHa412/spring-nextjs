@@ -228,7 +228,7 @@ public class AuthController {
     public ResponseEntity<?> resetPassword(@RequestBody PasswordResetToken forgotPasswordRequest) {
         String token = forgotPasswordRequest.getToken();
 
-        String email = (String) redisTemplate.opsForValue().get(token);
+        String email = redisTemplate.opsForValue().get(token);
 
         if (email == null) {
             return ResponseEntity.status(HttpStatus.SC_NOT_FOUND)

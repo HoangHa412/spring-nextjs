@@ -5,6 +5,7 @@ import Image from "next/image";
 
 interface FormForgotProps {
     onSignInClick: () => void;
+    onSuccessClick:() => void;
 }
 
 interface FormForgot{
@@ -12,7 +13,7 @@ interface FormForgot{
 }
 
 
-const FormForgot: React.FC<FormForgotProps> = ({onSignInClick}) => {
+const FormForgot: React.FC<FormForgotProps> = ({onSignInClick, onSuccessClick}) => {
     const router = useRouter();
     const [errors, seterrorss] = useState<{ [key: string]: string }>({});
     const [form, setForm] = useState<FormForgot>({
@@ -82,7 +83,7 @@ const FormForgot: React.FC<FormForgotProps> = ({onSignInClick}) => {
                             Email <span className="text-red-600 text-xs font-medium">*</span>
                         </label>
                         <input
-                            type="email"
+                            type="text"
                             id="email"
                             name="email"
                             value={form.email}
@@ -99,8 +100,9 @@ const FormForgot: React.FC<FormForgotProps> = ({onSignInClick}) => {
                     </div>
 
                     {/* Button */}
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center text-center">
                         <button
+                            onClick={onSuccessClick}
                             type="submit"
                             className="h-[40px] w-full font-semibold flex rounded-8 items-center justify-center bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white"
                         >
