@@ -1,12 +1,13 @@
 import Login from "../../components/Authentication";
 import '../globals.css'
+import FormLogin from "@/components/Authentication/SignIn/FormLogin";
 
 export default function Home() {
     return (
-        <div
-            className="contact-container h-screen mx-auto w-full p-[94px] flex items-center"
-        >
-            <Login />
+        <div>
+            <Login>
+                <FormLogin/>
+            </Login>
         </div>
     );
 }

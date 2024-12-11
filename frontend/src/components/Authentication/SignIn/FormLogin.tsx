@@ -1,21 +1,13 @@
+'use client'
 import Image from 'next/image';
 import Link from 'next/link';
 import React, {useEffect, useState} from 'react';
 import AuthService from "@/services/auth";
 import {useRouter} from "next/navigation";
+import {Login} from "@/types";
 
 
-interface Login {
-    username: string
-    password: string
-}
-
-interface FormLoginProps {
-    onSignUpClick: () => void;
-    onForgotPasswordClick: () => void;
-}
-
-const FormLogin: React.FC<FormLoginProps> = ({onSignUpClick, onForgotPasswordClick}) => {
+const FormLogin: React.FC = () => {
     const router = useRouter();
     const [error, setError] = useState<string>('')
     const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -90,11 +82,12 @@ const FormLogin: React.FC<FormLoginProps> = ({onSignUpClick, onForgotPasswordCli
     }
     return (
             <div
-                className='flex flex-col rounded-16 border w-full max-w-[500px] p-6 gap-5 border-[#C9D8DF] bg-[#F9FBFE]'>
+                className='flex flex-col rounded-16 border w-full p-6 gap-5 border-[#C9D8DF] bg-[#F9FBFE]'>
                 <h1 className='text-left font-bold text-2xl'>Welcome back</h1>
                 {/*Login with*/}
                 <div className='flex justify-between'>
-                    <Link href='#' className='flex gap-2 items-center rounded-8 border py-2 px-5'>
+                    <Link href='http://localhost:8081/oauth2/authorization/google'
+                          className='flex gap-2 items-center rounded-8 border py-2 px-5'>
                         <Image
                             src='/image/google logo (Community).svg'
                             alt='#'
@@ -187,9 +180,11 @@ const FormLogin: React.FC<FormLoginProps> = ({onSignUpClick, onForgotPasswordCli
                                    className='w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800'/>
                             <span className='text-gray-500 ml-1 text-sm'>Remember me</span>
                         </label>
-                        <span
-                            className='text-sky-600 text-sm font-medium hover:underline text-right cursor-pointer'
-                            onClick={onForgotPasswordClick}>Forget password?</span>
+                        <Link href='/login/forgotpass' passHref>
+                            <span
+                                className='text-sky-600 text-sm font-medium hover:underline text-right cursor-pointer'
+                            >Forget password?</span>
+                        </Link>
                     </div>
 
                     {/*button*/}
@@ -201,8 +196,10 @@ const FormLogin: React.FC<FormLoginProps> = ({onSignUpClick, onForgotPasswordCli
                         </button>
                     </div>
                     <h3 className='text-sm text-gray-500'>Don&#39;t have an account yet?
-                        <span className='text-sky-800 font-bold hover:underline cursor-pointer'
-                              onClick={onSignUpClick}>Sign up here</span>
+                        <Link href='/login/signup' passHref>
+                            <span className='text-sky-800 font-bold hover:underline cursor-pointer'
+                            >Sign up here</span>
+                        </Link>
                     </h3>
                 </form>
             </div>

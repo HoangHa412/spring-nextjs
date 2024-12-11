@@ -1,19 +1,15 @@
+'use client'
 import React, {useState} from "react";
 import {useRouter} from "next/navigation";
 import AuthService from "@/services/auth";
 import Image from "next/image";
-
-interface FormForgotProps {
-    onSignInClick: () => void;
-    onSuccessClick:() => void;
-}
 
 interface FormForgot{
     email: string
 }
 
 
-const FormForgot: React.FC<FormForgotProps> = ({onSignInClick, onSuccessClick}) => {
+const FormForgot: React.FC = () => {
     const router = useRouter();
     const [errors, seterrorss] = useState<{ [key: string]: string }>({});
     const [form, setForm] = useState<FormForgot>({
@@ -49,7 +45,7 @@ const FormForgot: React.FC<FormForgotProps> = ({onSignInClick, onSuccessClick}) 
                 email: '',
             });
             console.log('email successfully')
-            // router.push('');
+            await router.push('/login/forgotpass/sendsuccess');
         } catch (err) {
             const errorMessage =
                 (err as { response?: { data?: { message?: string } } }).response?.data?.message ||
@@ -59,15 +55,13 @@ const FormForgot: React.FC<FormForgotProps> = ({onSignInClick, onSuccessClick}) 
     };
 
     return (
-        <div className='pt-[120px]'>
             <div
-                className="flex flex-col rounded-16 border w-full max-w-[500px] p-6 gap-5 border-[#C9D8DF] bg-[#F9FBFE] ">
+                className="flex flex-col rounded-16 border w-full p-6 gap-5 border-[#C9D8DF] bg-[#F9FBFE]">
                 <Image
                     src='/image/fi-rs-arrow-left.svg'
                     alt='icon'
                     width={24}
                     height={24}
-                    onClick={onSignInClick}
                     className='cursor-pointer'
                 />
                 <h1 className=" font-bold text-3xl text-center">Reset your password</h1>
@@ -102,7 +96,6 @@ const FormForgot: React.FC<FormForgotProps> = ({onSignInClick, onSuccessClick}) 
                     {/* Button */}
                     <div className="flex justify-center items-center text-center">
                         <button
-                            onClick={onSuccessClick}
                             type="submit"
                             className="h-[40px] w-full font-semibold flex rounded-8 items-center justify-center bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white"
                         >
@@ -111,7 +104,6 @@ const FormForgot: React.FC<FormForgotProps> = ({onSignInClick, onSuccessClick}) 
                     </div>
                 </form>
             </div>
-        </div>
     );
 }
 

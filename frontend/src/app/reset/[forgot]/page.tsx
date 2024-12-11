@@ -1,14 +1,13 @@
 import React from "react";
 import Login from "@/components/Authentication";
+import FormReset from "@/components/Authentication/ResetPass/FormReset";
 
 
 const ForgotPassword = () =>{
     return (
-        <div
-            className="contact-container h-screen mx-auto w-full p-[94px] flex items-center"
-        >
-            <Login/>
-        </div>
+        <Login>
+            <FormReset/>
+        </Login>
     )
 }
 

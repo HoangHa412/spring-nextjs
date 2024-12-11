@@ -54,7 +54,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             redisTemplate.opsForValue().set(refreshToken, true, jwtRefreshExprition, TimeUnit.MINUTES);
         }
 
-        redirect = "http://localhost:3000/loading?token=" + token;
+        redirect = "http://localhost:3000/login/loading?token=" + token;
         new DefaultRedirectStrategy().sendRedirect(request, response, redirect);
     }
 }

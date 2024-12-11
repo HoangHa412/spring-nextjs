@@ -40,7 +40,15 @@ const ForgotPassword = async (payload: object) =>{
     }
 }
 
-
+const ResetPassword = async (payload: object) => {
+    try {
+        const response = await axiosInstance.post("/auth/reset-password", payload)
+        return response.data
+    } catch (err) {
+        console.error("Failed to reset password: ", err)
+        throw err
+    }
+}
 
 
 const AuthService = {
@@ -48,6 +56,7 @@ const AuthService = {
     refreshToken,
     SignUp,
     ForgotPassword,
+    ResetPassword
 }
 
 export default AuthService

@@ -1,20 +1,12 @@
-import React, { useState } from 'react';
+'use client'
+import React, {useState} from 'react';
 import AuthService from "@/services/auth";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
+import Link from "next/link";
+import {SignUp} from "@/types";
 
-interface SignUp {
-    username: string;
-    password: string;
-    cfPassword: string;
-    email: string;
-    phone: string;
-}
 
-interface FormSignUpProps {
-    onSignInClick: () => void;
-}
-
-const FormSignUp: React.FC<FormSignUpProps> = ({ onSignInClick }) => {
+const FormSignUp: React.FC = () => {
     const router = useRouter();
     const [errors, seterrorss] = useState<{ [key: string]: string }>({});
     const [form, setForm] = useState<SignUp>({
@@ -80,12 +72,12 @@ const FormSignUp: React.FC<FormSignUpProps> = ({ onSignInClick }) => {
             const errorMessage =
                 (err as { response?: { data?: { message?: string } } }).response?.data?.message ||
                 'An unexpected error occurred. Please try again.';
-            seterrorss({ general: errorMessage });
+            seterrorss({general: errorMessage});
         }
     };
 
     return (
-        <div className="flex flex-col rounded-16 border w-full max-w-[500px] p-6 gap-5 border-[#C9D8DF] bg-[#F9FBFE] ">
+        <div className="flex flex-col rounded-16 border w-full p-6 gap-5 border-[#C9D8DF] bg-[#F9FBFE] ">
             <h1 className="text-left font-bold text-2xl">Do you want to Sign Up?</h1>
             <form
                 onSubmit={handleSubmit}
@@ -101,7 +93,7 @@ const FormSignUp: React.FC<FormSignUpProps> = ({ onSignInClick }) => {
                         id="email"
                         name="email"
                         value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        onChange={(e) => setForm({...form, email: e.target.value})}
                         placeholder="Enter your email address"
                         className="h-[40px] border rounded-8 px-3 py-2 border-[#CCD0D5]"
                     />
@@ -120,7 +112,7 @@ const FormSignUp: React.FC<FormSignUpProps> = ({ onSignInClick }) => {
                         id="username"
                         name="username"
                         value={form.username}
-                        onChange={(e) => setForm({ ...form, username: e.target.value })}
+                        onChange={(e) => setForm({...form, username: e.target.value})}
                         placeholder="Enter your username"
                         className="h-[40px] border rounded-8 px-3 py-2 border-[#CCD0D5]"
                     />
@@ -142,7 +134,7 @@ const FormSignUp: React.FC<FormSignUpProps> = ({ onSignInClick }) => {
                         id="phone"
                         name="phone"
                         value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        onChange={(e) => setForm({...form, phone: e.target.value})}
                         placeholder="Enter your phone number"
                         className="h-[40px] border rounded-8 px-3 py-2 border-[#CCD0D5]"
                     />
@@ -158,7 +150,7 @@ const FormSignUp: React.FC<FormSignUpProps> = ({ onSignInClick }) => {
                         id="password"
                         name="password"
                         value={form.password}
-                        onChange={(e) => setForm({ ...form, password: e.target.value })}
+                        onChange={(e) => setForm({...form, password: e.target.value})}
                         placeholder="Enter your password"
                         className="h-[40px] border rounded-8 px-3 py-2 border-[#CCD0D5]"
                     />
@@ -177,7 +169,7 @@ const FormSignUp: React.FC<FormSignUpProps> = ({ onSignInClick }) => {
                         id="cfPassword"
                         name="cfPassword"
                         value={form.cfPassword}
-                        onChange={(e) => setForm({ ...form, cfPassword: e.target.value })}
+                        onChange={(e) => setForm({...form, cfPassword: e.target.value})}
                         placeholder="Confirm your password"
                         className="h-[40px] border rounded-8 px-3 py-2 border-[#CCD0D5]"
                     />
@@ -198,12 +190,15 @@ const FormSignUp: React.FC<FormSignUpProps> = ({ onSignInClick }) => {
 
                 <h3 className="text-sm text-gray-500">
                     Already have an account?{' '}
-                    <span
-                        className="text-sky-800 font-bold hover:underline cursor-pointer"
-                        onClick={onSignInClick}
+                    <Link
+                        href='/login' passHref
                     >
-                        Sign in here
-                    </span>
+                        <span
+                            className="text-sky-800 font-bold hover:underline cursor-pointer"
+                        >
+                            Sign in here
+                        </span>
+                    </Link>
                 </h3>
             </form>
         </div>

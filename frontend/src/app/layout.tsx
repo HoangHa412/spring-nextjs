@@ -1,9 +1,9 @@
 'use client'
 import "./globals.css";
-import { Inter } from "next/font/google";
+import {Inter} from "next/font/google";
 import Header from "@/components/Layout/Header";
 import LeftSide from "@/components/Layout/LeftSide";
-import { usePathname } from "next/navigation";
+import {usePathname} from "next/navigation";
 import React from "react";
 
 const inter = Inter({
@@ -18,24 +18,24 @@ export default function RootLayout({
 }>) {
     const pathname = usePathname();
 
-    // Define paths to hide the Header and LeftSide components
-    const hiddenHeaderPaths = ["/", "/login"];
-    const hiddenLeftSidePaths = ["/", "/login" ];
+    const hiddenHeaderPaths = "/";
+    const hiddenLeftSidePaths = "/";
 
-    // Check if the pathname matches /reset/[id] pattern
+    // Check if the pathname matches hidden layout paths
+    const isLoginPath = pathname.startsWith("/login");
     const isResetPage = pathname.startsWith("/reset");
 
-    // Hide the layout components if it's the reset page
-    const showHeader = !isResetPage && !hiddenHeaderPaths.includes(pathname);
-    const showLeftSide = !isResetPage && !hiddenLeftSidePaths.includes(pathname);
+    // Hide layout components if it's login or reset page
+    const showLayout = !(isLoginPath || isResetPage || pathname === hiddenHeaderPaths || pathname === hiddenLeftSidePaths);
+
 
     return (
         <html lang="en">
         <body className={`${inter.className} antialiased`}>
-        {showHeader && <Header />}
+        {showLayout && <Header/>}
         <div className="flex">
-            {showLeftSide && <LeftSide />}
-            <div className={showLeftSide ? "pl-[270px] p-3 w-full" : "w-full"}>
+            {showLayout && <LeftSide/>}
+            <div className={showLayout ? "pl-[270px] p-5 w-full" : "w-full"}>
                 {children}
             </div>
         </div>

@@ -1,10 +1,10 @@
-import Welcome from "@/components/Welcome";
+import Dashboard from "../../components/Dashboard";
 
 
 export default function Page(){
     return(
         <main>
-            <Welcome/>
+            <Dashboard/>
         </main>
     )
 }

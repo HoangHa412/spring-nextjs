@@ -1,3 +1,4 @@
+'use client'
 import React, {useEffect, useRef, useState} from "react";
 
 
@@ -31,9 +32,8 @@ const SendSuccess: React.FC = () => {
     };
 
     return (
-        <div className='pt-[120px]'>
             <div
-                className="flex flex-col rounded-16 border w-full max-w-[500px] p-6 gap-5 border-[#C9D8DF] bg-[#F9FBFE] ">
+                className="flex flex-col rounded-16 border w-full  p-6 gap-5 border-[#C9D8DF] bg-[#F9FBFE] ">
                 <h1 className=" font-bold text-3xl text-center">Send mail Successfully</h1>
                 <span
                     className='text-center font-normal text-base'>Please check your mail to get reset link </span>
@@ -41,7 +41,6 @@ const SendSuccess: React.FC = () => {
                     Time remaining: {formatTime(duration)}
                 </div>
             </div>
-        </div>
     );
 }
 

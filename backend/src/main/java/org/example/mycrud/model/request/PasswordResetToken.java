@@ -13,4 +13,6 @@ public class PasswordResetToken {
     private String token;
 
     private String password;
+
+    private String cfPassword;
 }
