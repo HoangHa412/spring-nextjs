@@ -5,6 +5,7 @@ import Header from "@/components/Layout/Header";
 import LeftSide from "@/components/Layout/LeftSide";
 import {usePathname} from "next/navigation";
 import React from "react";
+import Scroll from "@/components/Scroll";
 
 const inter = Inter({
     subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({
 
     return (
         <html lang="en">
+        <Scroll />
         <body className={`${inter.className} antialiased`}>
         {showLayout && <Header/>}
         <div className="flex">

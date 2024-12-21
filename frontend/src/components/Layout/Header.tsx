@@ -8,7 +8,7 @@ import MyAccountNav from "@/components/Layout/MyAccountNav";
 const Header: FC = () => {
 
   return (
-    <header className=' border-b bg-white top-0 h-[60px]'>
+    <header className=' border-b sticky bg-white top-0 h-[60px]'>
       <div className='pl-[270px] w-full h-full flex justify-between items-center'>
           {/*input*/}
           <div className='w-full max-w-[625px] relative'>

@@ -5,8 +5,8 @@ import Avatar from "@/components/Atoms/Avatar";
 
 const MenuList = [
     {icon: '/image/Chart.svg', name: 'Dashboard', href: "/dashboard", icon1: '/image/Chart1.svg'},
-    {icon: '/image/Chart.svg', name: 'Dashboard2', href: "/welcome", icon1: '/image/Chart1.svg'},
-    {icon: '/image/Chart.svg', name: 'Account', href: "/account", icon1: '/image/Chart1.svg'},
+    {icon: '/image/Chart.svg', name: 'Manage Menu', href: "/menu", icon1: '/image/Document.svg'},
+    {icon: '/image/Chart.svg', name: 'Account', href: "/account", icon1: '/image/Profile.svg'},
     {icon: '/image/Chart.svg', name: 'Dashboard4', href: "/welcome", icon1: '/image/Chart1.svg'},
     {icon: '/image/Chart.svg', name: 'Dashboard5', href: "/welcome", icon1: '/image/Chart1.svg'},
     {icon: '/image/Chart.svg', name: 'Dashboard6', href: "/welcome", icon1: '/image/Chart1.svg'},

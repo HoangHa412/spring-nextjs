@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import {Bar} from "react-chartjs-2";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -9,6 +9,7 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
+
 
 // Register Chart.js components
 ChartJS.register(
@@ -49,19 +50,10 @@ const BarChart = () => {
         maintainAspectRatio: false,
         barThickness: 11,
         scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    offset: true
-                },
-                border: {
-                    display: false,
-                },
-                borderColor: "#FFFFFF"
-            },
             x: {
                 grid: {
-                    offset: true
+                    drawBorder: false,
+                    lineWidth: 0
                 }
             }
         }
