@@ -27,7 +27,6 @@ public enum ErrorCodes {
     ROLE_NAME_EXISTED(16, "Role name already exists"),
     ROLE_NAME_NOT_FOUND(17, "Role name not found");
 
-
     private final Integer code;
     private final String message;
 
