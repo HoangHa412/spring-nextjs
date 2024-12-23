@@ -85,7 +85,7 @@ public class SecurityConfig{
                 ))
                 .authorizeHttpRequests(registry -> {
                     registry
-                            .requestMatchers("/auth/**", "ws/**", "/login/**").permitAll()
+                            .requestMatchers("/auth/**", "ws/**", "/login/**", "actuator").permitAll()
                             .anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
